@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monitoring IoT - Inorwat</title>
+  <link rel="stylesheet" href="monitoring-style.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2 class="sidebar-title">INORWAT</h2>
+    <nav>
+      <ul class="sidebar-menu">
+        <!-- Dashboard dengan ikon rumah -->
+        <li class="menu-item active">
+          <img src="images/icons8-house-48.png" alt="Dashboard Icon" class="menu-icon">
+          <span>Monitoring</span>
+        </li>
+        <!-- Menu lain tanpa ikon -->
+        <li class="menu-item">
+          <span>Inorwat I</span>
+        </li>
+        <li class="menu-item">
+          <span>Inorwat II</span>
+        </li>
+        <li class="menu-item">
+          <span>Add Inorwat</span>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main-content">
+    <!-- Header -->
+    <header class="top-header">
+      <div class="datetime">
+        <span id="clock"></span>
+        <span id="date"></span>
+      </div>
+      <div class="greeting">Halo, Salman</div>
+    </header>
+
+    <!-- Sensor Data -->
+    <section class="sensor-data">
+      <div class="card humidity-card">
+        <h3>Humidity</h3>
+        <div class="humidity-display">
+          <img src="images/humidity-gauge.png" alt="Humidity Gauge" class="humidity-gauge">
+          <span id="humidity" class="humidity-value">30%</span>
+        </div>
+      </div>
+
+      <div class="card temperature-card">
+        <h3>Temperature</h3>
+        <div class="temperature-display">
+          <img src="images/temperature-icon.png" alt="Temperature Icon" class="temperature-icon">
+          <span id="temperature" class="temperature-value">60°C</span>
+        </div>
+      </div>
+
+      <div class="card ph-card">
+        <h3>pH</h3>
+        <div class="ph-display">
+          <img src="images/ph-icon.png" alt="pH Icon" class="ph-icon">
+          <span id="ph" class="ph-value">5.8</span>
+        </div>
+      </div>
+
+      <div class="card ammonia-card">
+        <h3>Ammonia</h3>
+        <div class="ammonia-display">
+          <img src="images/ammonia-gauge.png" alt="Ammonia Gauge" class="ammonia-gauge">
+          <span id="ammonia" class="ammonia-value">10 ppm</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls -->
+    <section class="controls">
+      <div class="card control-card">
+        <h3>Pemanas (Heater)</h3>
+        <label class="switch">
+          <input type="checkbox" id="heater">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="card control-card">
+        <h3>Penyemprot (Sprayer)</h3>
+        <label class="switch">
+          <input type="checkbox" id="sprayer" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Script untuk jam & tanggal realtime
+    function updateDateTime() {
+      const now = new Date();
+      document.getElementById("clock").textContent = now.toLocaleTimeString();
+      document.getElementById("date").textContent = now.toLocaleDateString("id-ID", {
+        weekday: "long", year: "numeric", month: "long", day: "numeric"
+      });
+    }
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+  </script>
+</body>
+</html>

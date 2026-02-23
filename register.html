@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Intelligent Organic Waste Transformation</title>
+  <link rel="stylesheet" href="register-style.css">
+</head>
+<body>
+  <!-- Bar putih di atas -->
+  <div class="top-bar">
+    <div class="logo-group">
+      <img src="images/inorwat-logo.png" alt="Logo Inorwat">
+      <span class="logo-text">Intelligent Organic Waste Transformation</span>
+    </div>
+  </div>
+
+  <!-- Form Register -->
+  <div class="auth-container">
+    <h2 class="auth-title">Register</h2>
+
+    <form class="auth-form" action="register.php" method="POST" autocomplete="off">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" placeholder="Masukkan username" required minlength="4">
+
+      <label for="fullname">Fullname</label>
+      <input type="text" id="fullname" name="fullname" placeholder="Masukkan nama lengkap" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Masukkan email" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Masukkan password" required minlength="6" autocomplete="new-password">
+
+      <label for="confirm_password">Konfirmasi Password</label>
+      <input type="password" id="confirm_password" name="confirm_password" placeholder="Ulangi password" required minlength="6" autocomplete="new-password">
+
+      <button type="submit" class="auth-button">REGISTER</button>
+    </form>
+
+    <div class="link-group">
+      <p>Sudah punya akun? <a href="login.html">Login di sini</a></p>
+      <p><a href="index.php">← Kembali ke Beranda</a></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 Intelligent Organic Waste Transformation - Telkom University Surabaya</p>
+  </footer>
+</body>
+</html>

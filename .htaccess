@@ -1,0 +1,2 @@
+# Prioritaskan index.php sebagai halaman default
+DirectoryIndex index.php index.html

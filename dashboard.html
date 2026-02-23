@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monitoring Dashboard - Inorwat</title>
+  <link rel="stylesheet" href="dashboard-style.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2 class="sidebar-title">INORWAT</h2>
+    <nav>
+      <ul>
+        <li class="active">Dashboard</li>
+        <li>Inorwat I</li>
+        <li>Inorwat II</li>
+        <li>Add Inorwat</li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main-content">
+    <!-- Header -->
+    <header class="top-header">
+      <div class="datetime">
+        <span id="clock">12:19:50 PM</span>
+        <span id="date">Minggu, 5 Desember 2021</span>
+      </div>
+      <div class="greeting">Hello Salman</div>
+    </header>
+
+    <!-- Sensor data -->
+    <section class="sensor-section">
+      <div class="sensor-box">Humidity<br><span class="value">30%</span></div>
+      <div class="sensor-box">Temperature<br><span class="value">60°C</span></div>
+      <div class="sensor-box">pH<br><span class="value">5.8</span></div>
+      <div class="sensor-box">Ammonia<br><span class="value">10 ppm</span></div>
+    </section>
+
+    <!-- Control toggles -->
+    <section class="control-section">
+      <div class="control-box">
+        <label>Pemanas (Heater)</label>
+        <input type="checkbox" id="heater-toggle">
+      </div>
+      <div class="control-box">
+        <label>Penyemprot (Sprayer)</label>
+        <input type="checkbox" id="sprayer-toggle" checked>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

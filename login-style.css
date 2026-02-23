@@ -1,0 +1,161 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4fdf4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: #333;
+}
+
+/* Bar putih di atas */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: white;
+  padding: 15px 40px;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+}
+
+.logo-group img {
+  height: 50px;
+  width: auto;
+  margin-right: 12px;
+}
+
+.logo-text {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #2e7d32;
+  line-height: 1.2;
+}
+
+/* Form login */
+.login-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.login-title {
+  font-size: 1.6em;
+  margin-bottom: 30px;
+  color: #2e7d32;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: left;
+}
+
+.login-form label {
+  font-weight: bold;
+  color: #2e7d32;
+}
+
+.login-form input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1.1em;
+}
+
+.login-button {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  padding: 14px;
+  font-size: 1.1em;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+.login-button:hover {
+  background-color: #1b5e20;
+}
+
+.register-link,
+.back-link {
+  margin-top: 25px;
+  font-size: 1em;
+}
+
+.register-link a,
+.back-link a {
+  color: #2e7d32;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #c8e6c9; /* hijau muda */
+  font-size: 0.9em;
+  margin-top: auto;
+}
+
+/* Notifikasi */
+.success-message {
+  color: green;
+  background: #d4edda;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.exists-message {
+  color: orange;
+  background: #fff3cd;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+/* Password wrapper untuk ikon mata */
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  flex: 1;
+}
+
+/* Ikon mata hanya muncul saat input difokuskan */
+.toggle-password {
+  cursor: pointer;
+  margin-left: 8px;
+  font-size: 1.2em;
+  display: none; /* default disembunyikan */
+}
+
+.password-wrapper:focus-within .toggle-password {
+  display: inline; /* muncul saat input password difokuskan */
+}
