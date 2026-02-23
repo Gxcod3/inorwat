@@ -1,10 +1,34 @@
 <?php
 session_start();
-include 'db_connect.php';
 
-$sql = "SELECT * FROM sensor_data ORDER BY created_at DESC LIMIT 1";
-$result = $conn->query($sql);
-$data = $result->fetch_assoc();
+$token = "H5hayR1JvV0EhWsoSiq2vsZ6SW8-hh3N";
+
+function getData($token, $id) {
+    $url = "https://blynk.cloud/external/api/get?token=$token&dataStreamId=$id";
+    $response = @file_get_contents($url);
+    return $response !== false ? $response : "-";
+}
+
+function updateData($token, $id, $value) {
+    $url = "https://blynk.cloud/external/api/update?token=$token&dataStreamId=$id&value=$value";
+    $response = @file_get_contents($url);
+    return $response !== false ? $response : "Error";
+}
+
+if (isset($_GET['action']) && isset($_GET['id'])) {
+    $id = intval($_GET['id']);
+    $value = intval($_GET['action']);
+    updateData($token, $id, $value);
+    header("Location: monitoring.php");
+    exit;
+}
+
+$humidity = getData($token, 1);
+$temperature = getData($token, 2);
+$waterPumpStatus = getData($token, 5);
+$fanComposterStatus = getData($token, 4);
+$pengadukStatus = getData($token, 7);
+$heaterStatus = getData($token, 6);
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -12,6 +36,42 @@ $data = $result->fetch_assoc();
   <meta charset="UTF-8">
   <title>Monitoring IoT - Inorwat</title>
   <link rel="stylesheet" href="monitoring-style.css">
+  <style>
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px; width: 26px;
+      left: 4px; bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #2e7d32;
+    }
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+  </style>
 </head>
 <body>
   <?php include 'sidebar.php'; ?>
@@ -25,14 +85,12 @@ $data = $result->fetch_assoc();
       <div class="greeting">Hello <?= $_SESSION['username'] ?? 'Salman' ?></div>
     </header>
 
-    <!-- Sensor Data Grid -->
     <section class="sensor-data">
-      <!-- Baris 1 -->
       <div class="card humidity-card">
         <h3>Humidity</h3>
         <div class="humidity-display">
           <img src="images/speedmeter-humidity.png" alt="Humidity Gauge" class="humidity-gauge">
-          <span class="humidity-value"><?= $data['humidity'] ?? '-' ?>%</span>
+          <span class="humidity-value"><?= $humidity ?>%</span>
         </div>
       </div>
 
@@ -40,40 +98,42 @@ $data = $result->fetch_assoc();
         <h3>Temperature</h3>
         <div class="temperature-display">
           <img src="images/icons8-thermometer-48.png" alt="Temperature Icon" class="temperature-icon">
-          <span class="temperature-value"><?= $data['temperature'] ?? '-' ?>°C</span>
+          <span class="temperature-value"><?= $temperature ?>°C</span>
         </div>
       </div>
 
-      <!-- Baris 2 -->
-      <div class="card ph-card">
-        <h3>pH</h3>
-        <div class="ph-display">
-          <img src="images/ph.png" alt="pH Icon" class="ph-icon">
-          <span class="ph-value"><?= $data['ph'] ?? '-' ?></span>
-        </div>
-      </div>
-
-      <div class="card ammonia-card">
-        <h3>Ammonia</h3>
-        <div class="ammonia-display">
-          <img src="images/speedmeter-amonia.png" alt="Ammonia Gauge" class="ammonia-gauge">
-          <span class="ammonia-value"><?= $data['ammonia'] ?? '-' ?> ppm</span>
-        </div>
-      </div>
-
-      <!-- Baris 3: Kontrol -->
       <div class="card control-card">
-        <h3>Pemanas (Heater)</h3>
+        <h3>Water Pump</h3>
         <label class="switch">
-          <input type="checkbox" id="heater">
+          <input type="checkbox" <?= ($waterPumpStatus == 1 ? 'checked' : '') ?>
+                 onchange="location.href='monitoring.php?action='+(this.checked?1:0)+'&id=5'">
           <span class="slider"></span>
         </label>
       </div>
 
       <div class="card control-card">
-        <h3>Penyemprot (Sprayer)</h3>
+        <h3>Fan Composter</h3>
         <label class="switch">
-          <input type="checkbox" id="sprayer" checked>
+          <input type="checkbox" <?= ($fanComposterStatus == 1 ? 'checked' : '') ?>
+                 onchange="location.href='monitoring.php?action='+(this.checked?1:0)+'&id=4'">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="card control-card">
+        <h3>Pengaduk</h3>
+        <label class="switch">
+          <input type="checkbox" <?= ($pengadukStatus == 1 ? 'checked' : '') ?>
+                 onchange="location.href='monitoring.php?action='+(this.checked?1:0)+'&id=7'">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="card control-card">
+        <h3>Pemanas (Heater)</h3>
+        <label class="switch">
+          <input type="checkbox" <?= ($heaterStatus == 1 ? 'checked' : '') ?>
+                 onchange="location.href='monitoring.php?action='+(this.checked?1:0)+'&id=6'">
           <span class="slider"></span>
         </label>
       </div>
